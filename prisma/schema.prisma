@@ -6,3 +6,37 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Users {
+  userId        String   @unique @map("user_id") @db.VarChar(255)
+  firstName     String   @map("first_name") @db.VarChar(150)
+  lastName      String   @map("last_name") @db.VarChar(150)
+  email         String   @unique @db.VarChar(255)
+  phone         String   @db.Char(14)
+  emailVerified Boolean? @default(false) @map("email_verified")
+  phoneVerified Boolean? @default(false) @map("phone_verified")
+  password      String?  @db.VarChar(100)
+  isDeleted     Boolean? @default(false) @map("is_deleted")
+
+  address UserAddress[]
+
+  @@index([email, phone])
+  @@map("users")
+}
+
+model UserAddress {
+  id         String   @unique @map("id") @db.VarChar(255)
+  userId     String   @unique @map("user_id") @db.VarChar(255)
+  addressOne String   @map("address_1") @db.VarChar(255)
+  addressTwo String?  @map("address_2") @db.VarChar(255)
+  city       String   @db.VarChar(150)
+  state      String   @db.VarChar(150)
+  pin        String   @db.Char(6)
+  country    String   @db.VarChar(150)
+  phone      String   @db.Char(14)
+  isActive   Boolean? @default(false) @map("is_active")
+
+  Users Users? @relation(fields: [userId], references: [userId])
+
+  @@map("users_address")
+}
