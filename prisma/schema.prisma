@@ -40,3 +40,30 @@ model UserAddress {
 
   @@map("users_address")
 }
+
+model Category {
+  categoryId  String   @unique @map("category_id") @db.VarChar(255)
+  name        String   @map("first_name") @db.VarChar(150)
+  image       String   @map("image_url") @db.VarChar(255)
+  description String   @db.VarChar(255)
+  isDeleted   Boolean? @default(false) @map("is_deleted")
+
+  product Product[]
+}
+
+model Product {
+  productId            String    @unique @map("product_id") @db.VarChar(255)
+  name                 String    @map("product_name") @db.VarChar(150)
+  price                Decimal   @db.Decimal(10, 2)
+  sellingPrice         Decimal   @map("selling_price") @db.Decimal(10, 2)
+  image                String    @map("image_url") @db.VarChar(255)
+  description          String    @db.VarChar(255)
+  categoryId           String?   @map("category_id") @db.VarChar(255)
+  createdOn            DateTime? @default(now()) @map("created_on")
+  updatedOn            DateTime? @updatedAt @map("updated_on")
+  isAvailable          Boolean?  @default(true) @map("is_available")
+  prescriptionRequired Boolean?  @default(false) @map("prescription_required")
+  isDeleted            Boolean?  @default(false) @map("is_deleted")
+
+  Category Category? @relation(fields: [categoryId], references: [categoryId])
+}
