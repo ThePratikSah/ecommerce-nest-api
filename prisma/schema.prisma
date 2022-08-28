@@ -42,11 +42,10 @@ model UserAddress {
 }
 
 model Category {
-  categoryId  String   @unique @map("category_id") @db.VarChar(255)
-  name        String   @map("first_name") @db.VarChar(150)
-  image       String   @map("image_url") @db.VarChar(255)
-  description String   @db.VarChar(255)
-  isDeleted   Boolean? @default(false) @map("is_deleted")
+  categoryId String   @unique @map("category_id") @db.VarChar(255)
+  name       String   @map("name") @db.VarChar(150)
+  image      String   @map("image_url") @db.VarChar(255)
+  isDeleted  Boolean? @default(false) @map("is_deleted")
 
   product Product[]
 }
