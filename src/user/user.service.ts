@@ -5,7 +5,15 @@ import { DatabaseService } from 'src/database/database.service';
 export class UserService {
   constructor(private databaseService: DatabaseService) {}
 
-  getAllUser() {
+  getAllUsers() {
     return this.databaseService.users.findMany();
+  }
+
+  getUserById(id: string) {
+    return this.databaseService.users.findUnique({
+      where: {
+        userId: id,
+      },
+    });
   }
 }
