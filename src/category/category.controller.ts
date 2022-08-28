@@ -25,6 +25,11 @@ export class CategoryController {
     return this.categoryService.getCategoryById(id);
   }
 
+  @Get(':id/products')
+  getProductsByCategory(@Param('id', ParseUUIDPipe) id: string) {
+    return this.categoryService.getProductsByCategory(id);
+  }
+
   @Post()
   addNewCategory(@Body() category: CreateCategoryDto) {
     return this.categoryService.addNewCategory(category);
