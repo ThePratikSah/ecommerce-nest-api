@@ -26,12 +26,12 @@ export class ProductController {
   }
 
   @Post()
-  addNewCategory(@Body() data: CreateProductDto) {
+  addNewProduct(@Body() data: CreateProductDto) {
     return this.productService.addNewProduct(data);
   }
 
   @Put(':productId')
-  updateCategory(
+  updateProduct(
     @Body() data: ProductDto,
     @Param('productId', ParseUUIDPipe) productId: string,
   ) {
@@ -39,7 +39,12 @@ export class ProductController {
   }
 
   @Delete(':productId')
-  deleteCategory(@Param('productId', ParseUUIDPipe) productId: string) {
+  deleteProduct(@Param('productId', ParseUUIDPipe) productId: string) {
     return this.productService.deleteProduct(productId);
   }
+
+  // TODO: Will add more routes in future
+  // 1. Get all deleted products
+  // 2. Restore deleted products
+  // 3. Permanently delete products
 }
