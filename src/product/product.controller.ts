@@ -25,6 +25,13 @@ export class ProductController {
     return this.productService.getProductById(id);
   }
 
+  @Get('category/:categoryId')
+  getProductsByCategory(
+    @Param('categoryId', ParseUUIDPipe) categoryId: string,
+  ) {
+    return this.productService.getProductsByCategory(categoryId);
+  }
+
   @Post()
   addNewProduct(@Body() data: CreateProductDto) {
     return this.productService.addNewProduct(data);

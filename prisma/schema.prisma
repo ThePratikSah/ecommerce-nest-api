@@ -66,3 +66,19 @@ model Product {
 
   Category Category? @relation(fields: [categoryId], references: [categoryId])
 }
+
+enum CouponType {
+  FLAT
+  PERCENT
+}
+
+model Coupon {
+  couponId    String      @unique @map("coupon_id") @db.VarChar(255)
+  code        String      @db.VarChar(150)
+  description String      @db.VarChar(255)
+  type        CouponType? @default(FLAT)
+  amount      Decimal     @db.Decimal(10, 2)
+  minCart     Decimal     @map("min_cart") @db.Decimal(10, 2)
+  isActive    Boolean?    @default(true) @map("is_active")
+  isDeleted   Boolean?    @default(false) @map("is_deleted")
+}

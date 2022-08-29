@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from 'src/database/database.service';
 import { uuid } from 'src/utils/helper';
+import { CreateProductDto } from './product.dto';
 
 @Injectable()
 export class ProductService {
@@ -29,7 +30,15 @@ export class ProductService {
     });
   }
 
-  addNewProduct(data: any) {
+  getProductsByCategory(categoryId: string) {
+    return this.databaseService.product.findMany({
+      where: {
+        categoryId,
+      },
+    });
+  }
+
+  addNewProduct(data: CreateProductDto) {
     const productId = uuid();
     return this.databaseService.product.create({
       data: {
