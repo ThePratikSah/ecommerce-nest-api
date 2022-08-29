@@ -30,6 +30,17 @@ export class CategoryService {
     });
   }
 
+  getProductsByCategory(id: string) {
+    return this.databaseService.category.findMany({
+      select: {
+        product: true,
+      },
+      where: {
+        categoryId: id,
+      },
+    });
+  }
+
   addNewCategory(data: CreateCategoryDto) {
     const categoryId = uuid();
     return this.databaseService.category.create({
