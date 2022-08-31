@@ -7,3 +7,5 @@ export class CreateCategoryDto {
   name: string;
   image: string;
 }
+
+// TODO: https://docs.nestjs.com/openapi/mapped-types

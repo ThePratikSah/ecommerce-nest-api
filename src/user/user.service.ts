@@ -32,4 +32,12 @@ export class UserService {
       },
     });
   }
+
+  getUserAddress(userId: string) {
+    return this.databaseService.userAddress.findMany({
+      where: {
+        userId,
+      },
+    });
+  }
 }
