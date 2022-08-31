@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from 'src/database/database.service';
 import { uuid } from 'src/utils/helper';
-import { CreateUserDto } from './user.dto';
+import { CreateUserAddressDto, CreateUserDto } from './user.dto';
 
 @Injectable()
 export class UserService {
@@ -37,6 +37,16 @@ export class UserService {
     return this.databaseService.userAddress.findMany({
       where: {
         userId,
+      },
+    });
+  }
+
+  addUserAddress(data: CreateUserAddressDto) {
+    const id = uuid();
+    return this.databaseService.userAddress.create({
+      data: {
+        id,
+        ...data,
       },
     });
   }

@@ -6,7 +6,7 @@ import {
   ParseUUIDPipe,
   Post,
 } from '@nestjs/common';
-import { CreateUserDto } from './user.dto';
+import { CreateUserAddressDto, CreateUserDto } from './user.dto';
 import { UserService } from './user.service';
 
 @Controller('user')
@@ -39,7 +39,10 @@ export class UserController {
   // since the auth is not implemented
   // can get user id from the body and add address to that id
   // but will be fixed once auth will be implemented
-  addNewAddress() {
-    return {};
+  addNewAddress(
+    @Body()
+    data: CreateUserAddressDto,
+  ) {
+    return this.userService.addUserAddress(data);
   }
 }
